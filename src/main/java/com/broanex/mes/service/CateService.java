@@ -29,6 +29,7 @@ public class CateService {
         return false;
     }
 
+    // TODO createCateCode 추가 개선 현재 한메서드에서 여러가지 작업 처리중
     private String createCateCode(String parentCateCode) {
         if (parentCateCode.length() > 5) {
             throw new IllegalArgumentException("하위 카테고리를 추가할수없는 카테고리를 선택하셨습니다.");

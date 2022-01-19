@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 // useOp가 가질수 있는 값이 Y,N 이라고만 판단하였고, 그렇다면 Enum 을 사용하는것이 이점을 가진다고 판단하였음,
-
+// TODO 1. Entity는 Setter를 가지면 안됨. (SETTER -> BUILDER )
+//      2. Entity를 너무 남용해서 사용했음, DTO를 만들어서 Entity가 꼭필요한 상황이 아니라면(repository에서 리턴할경우)
+//         DTO로 최대한 해결하도록 .
 @Entity
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
