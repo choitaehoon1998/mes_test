@@ -1,10 +1,12 @@
 package com.broanex.mes.controller;
 
 import com.broanex.mes.dto.GoodCateRequestDto;
-import com.broanex.mes.entity.GoodCate;
 import com.broanex.mes.service.GoodCateService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;

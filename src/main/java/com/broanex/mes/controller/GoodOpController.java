@@ -20,6 +20,7 @@ public class GoodOpController {
     public GoodOpController(GoodOpService goodOpService) {
         this.goodOpService = goodOpService;
     }
+
     // 삭제할경우 저장되지않은 goodsOp가 있을수도 있기때문에 삭제 되지않은 list를 리턴함.
     @DeleteMapping(value = "goodOp", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<GoodOp>> deleteGoodsOp(@RequestBody List<GoodOp> goodopList) {
@@ -27,8 +28,8 @@ public class GoodOpController {
         return ok(undeletedGoodOp);
     }
 
-    @PostMapping(value="goodOp" , produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateGoodsOp(@RequestBody GoodOp goodOp){
+    @PostMapping(value = "goodOp", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateGoodsOp(@RequestBody GoodOp goodOp) {
         goodOpService.updateGoodOp(goodOp);
         return ok(null);
     }

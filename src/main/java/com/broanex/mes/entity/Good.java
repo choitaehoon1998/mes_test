@@ -39,7 +39,7 @@ public class Good {
     @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
     private List<GoodOp> goodOpList = new ArrayList<>();
 
-    @OneToMany(mappedBy= "good" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
     private List<GoodCate> goodCateList = new ArrayList<>();
 
 }
