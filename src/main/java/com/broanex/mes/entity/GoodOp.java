@@ -5,6 +5,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+// GoodOp를 조회할경우, Good의 대한 정보까지 같이 포함하여 Return 할 필요는 없다고 판단하였고,
+// JsonIgnore라는 Annotation 을 이용하여 리턴할경우 Good에대한 정보는 리턴하지 않도록 하였음.
+
 @Entity
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+// isExist         -> 파라미터로 전달받은 goodOp가 DB에 실제로 존재하는 메서드 인지 확인함.
+// deleteAllByList -> 파라미터로 전달받은 goodOp 리스트 전부 삭제함 , 삭제되지 않은 리스트는 다시 리턴함.
+// updateGoodOp    -> 파라미터로 전달받은 goodOp를 업데이트함.
+
 @Service
 public class GoodOpService {
     private final GoodOpRepository goodOpRepository;

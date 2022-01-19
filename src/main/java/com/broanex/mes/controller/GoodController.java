@@ -12,6 +12,12 @@ import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
 
+//GetMapping(value="goods")                  -> Good를 조회하는 메소드
+//PostMapping(value="goods")                 -> Good를 저장하거나 업데이트하는 메소드
+//PutMapping(value="goods")                  -> Good를 업데이트하는 메소드
+//DeleteMapping(value="goods")               -> Good를 삭제하는 메소드
+//DeleteMapping(value="goods/{seq}/goodsOp") -> Good의 pk로 goodsOp를 삭제하는 메소드
+
 @RestController
 public class GoodController {
     private final GoodService goodService;

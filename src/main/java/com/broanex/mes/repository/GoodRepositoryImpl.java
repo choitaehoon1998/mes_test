@@ -13,6 +13,9 @@ import java.util.List;
 import static com.broanex.mes.entity.QGood.good;
 import static com.broanex.mes.entity.QGoodOp.goodOp;
 
+// findAllUsingQueryDsl  -> indexNo, gname,account,useOp를 통하여 good을 검색하는 메소드
+// 이하 private 메소드     -> 검색 조건을 처리하기위한 메소드
+
 @RequiredArgsConstructor
 public class GoodRepositoryImpl implements GoodQueryRepository {
     private final JPAQueryFactory queryFactory;

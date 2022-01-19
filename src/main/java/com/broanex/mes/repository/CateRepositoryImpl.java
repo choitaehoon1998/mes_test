@@ -13,6 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// findAllCateGory        -> indexNo, cateName, cateCode, upccate로 Category 를 조회하는 메소드
+// findCateCodeByCateCode -> parentCateCode 를 이용하여,
+//                           parentCateCode% 로 라이크 검색하고, 길이가 parentCateCode.length+ 2인것만 조회함.
+// existsByCateCode       -> CateCode를 통하여, Cate가 존재하는지 확인함.
+// 이하 private 메소드      -> 검색 조건을 처리하기위한 메소드들
+
 @RequiredArgsConstructor
 public class CateRepositoryImpl implements CateQueryRepository {
     private final JPAQueryFactory queryFactory;

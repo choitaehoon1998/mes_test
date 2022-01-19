@@ -12,6 +12,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// isExist                 -> 파리미터로 전달받은 goodIndexNo가 db에 실제로 존재하는지 확인함.
+// isUse                   -> 파라미터로 전달받은 useStauts 가 Y가 맞는지 확인함.
+// findAllGoods            -> 파리미터로 전달받은 값들을 통하여 Good 를 조회함.
+// saveOrUpdateGoods       -> 파라미터로 전달받은 good 을 업데이트하거나, 저장함.
+// deleteGoods             -> goods를 삭제함
+// updateGoods             -> goods을 업데이트함.
+// deleteGoodsOpByGoodsIdx -> goodIdx에 해당하는 goodsOp를 전부 삭제함.
 @Service
 public class GoodService {
     private final GoodRepository goodRepository;

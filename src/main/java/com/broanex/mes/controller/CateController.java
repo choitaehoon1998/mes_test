@@ -11,6 +11,10 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
+//GetMapping(value:Cate)    -> Cate를 조회하는 메소드
+//PostMapping(value:Cate)   -> Cate를 저장하거나, 업데이트 하는 메소드
+//DeleteMapping(value:Cate) -> Cate를 삭제하는 메소드
+
 @RestController
 public class CateController {
 

@@ -7,6 +7,8 @@ import java.util.List;
 
 import static com.broanex.mes.entity.QGoodOp.goodOp;
 
+// findAllGoodOpIdxByGoodsIdxUsingQueryDsl -> goodIdx로 검색하여, goodop 의  indexNo를 리스트 형태로 리턴
+
 @RequiredArgsConstructor
 public class GoodOpRepositoryImpl implements GoodOpQueryRepository {
     private final JPAQueryFactory queryFactory;

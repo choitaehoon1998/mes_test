@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
+//PostMapping(value="goodCate")   -> goodCate를 저장하는 메소드
+//DeleteMapping(value="goodCate") -> goodCate를 삭제하는 메소드
+
 @RestController
 public class GoodCateController {
     private final GoodCateService goodCateService;
@@ -25,8 +28,8 @@ public class GoodCateController {
         return ok(null);
     }
 
-    @DeleteMapping(value="goodCate", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteGoodCate(@RequestBody GoodCateRequestDto requestDto){
+    @DeleteMapping(value = "goodCate", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteGoodCate(@RequestBody GoodCateRequestDto requestDto) {
         goodCateService.deleteGoodCate(requestDto);
         return ok(null);
     }

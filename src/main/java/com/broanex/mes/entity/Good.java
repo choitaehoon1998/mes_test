@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+// useOp가 가질수 있는 값이 Y,N 이라고만 판단하였고, 그렇다면 Enum 을 사용하는것이 이점을 가진다고 판단하였음,
+
 @Entity
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
