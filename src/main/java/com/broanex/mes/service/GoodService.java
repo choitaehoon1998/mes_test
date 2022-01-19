@@ -69,4 +69,14 @@ public class GoodService {
             saveOrUpdateGoods(goods);
         }
     }
+
+    public void deleteGoodsOpByGoodsIdx(Long goodsIdx) {
+        if (isExist(goodsIdx)) {
+            List<Long> goodOpIdxList = goodOpRepository.findAllGoodOpIdxByGoodsIdxUsingQueryDsl(goodsIdx);
+            for (Long goodOpsIdx : goodOpIdxList) {
+                goodOpRepository.deleteById(goodOpsIdx);
+            }
+        }
+    }
+
 }

@@ -19,7 +19,7 @@ public class GoodController {
     public GoodController(GoodService goodService) {
         this.goodService = goodService;
     }
-    
+
     @GetMapping(value = "goods", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Good>> getAllGoods(@RequestParam(required = false) String gname,
                                                   @RequestParam(required = false) Long indexNo,
@@ -50,6 +50,12 @@ public class GoodController {
     @DeleteMapping(value = "goods", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteGoods(@RequestBody Good goods) {
         goodService.deleteGoods(goods);
+        return ok(null);
+    }
+
+    @DeleteMapping(value = "goods/{seq}/goodsOp", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteGoodsOpByGoodsIdx(@PathVariable(name = "seq") Long goodsIdx) {
+        goodService.deleteGoodsOpByGoodsIdx(goodsIdx);
         return ok(null);
     }
 }

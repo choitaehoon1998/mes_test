@@ -12,6 +12,7 @@ import javax.persistence.*;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "indexNo")
 @Getter
 @Setter
+@Builder
 @Table(name = "mes_goods_cate")
 public class GoodCate {
     @Id
@@ -23,7 +24,7 @@ public class GoodCate {
     private Good good;
 
     @ManyToOne
-    @JoinColumn(name = "cateCode",
+    @JoinColumn(name = "catecode",
             referencedColumnName = "catecode")
     private Cate cate;
 }
