@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 
-// isExist         -> 파라미터로 전달 받은 cate가 DB에 존재하는 Cate인지 확인하는 메서드
-// createCateCode  -> 파라미터로 전달받은 parentCateCode를 통하여, 하위 CateCode를 생성함
-//                    파리미터로 전달받은 parentCateCode가 5자리 초과라면 IllegalArugement Exception을 던짐
-// findAllCategory -> 전달 받은 파리미터로 모든 category 를 검색함
-// saveOrUpdate    -> 전달 받은 파리미터를 저장하거나 , 업데이트 함
-// deleteCategory  -> 전달 받은 파라미터를 삭제함 .
+// isExist            -> 파라미터로 전달 받은 cate가 DB에 존재하는 Cate인지 확인하는 메서드
+// isExistByCateCode  -> 파라미터로 전달 받은 cate의 해당하는 cateCode가 DB에 존재하는 Cate인지 확인하는 메서드
+// createCateCode     -> 파라미터로 전달받은 parentCateCode를 통하여, 하위 CateCode를 생성함
+//                       파리미터로 전달받은 parentCateCode가 5자리 초과라면 IllegalArugement Exception을 던짐
+// findAllCategory    -> 전달 받은 파리미터로 모든 category 를 검색함
+// saveOrUpdate       -> 전달 받은 파리미터를 저장하거나 , 업데이트 함
+// deleteCategory     -> 전달 받은 파라미터를 삭제함 .
 
 @Service
 public class CateService {
@@ -24,6 +25,13 @@ public class CateService {
 
     private boolean isExist(Cate cate) {
         if (cate.getIndexNo() != null && cateRepository.existsById(cate.getIndexNo())) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isExistByCateCode(Cate cate) {
+        if (cate.getCatecode() != null && cateRepository.existsByCateCode(cate.getCatecode())) {
             return true;
         }
         return false;
@@ -59,8 +67,8 @@ public class CateService {
 
     public void saveOrUpdate(Cate cate) {
         Cate parentCate = cate.getParentCate();
-        if (parentCate != null && parentCate.getIndexNo() != null && isExist(parentCate)) {
-            parentCate = cateRepository.findById(parentCate.getIndexNo()).get();
+        if (parentCate != null && isExistByCateCode(parentCate)) {
+            parentCate = cateRepository.findByCatecode(parentCate.getCatecode());
             cate.setCatecode(createCateCode(parentCate.getCatecode()));
             cate.setParentCate(parentCate);
         } else {
