@@ -1,5 +1,6 @@
-package com.broanex.mes.repository;
+package com.broanex.mes.repository.impl;
 
+import com.broanex.mes.repository.GoodOpQueryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 

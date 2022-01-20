@@ -1,9 +1,10 @@
-package com.broanex.mes.repository;
+package com.broanex.mes.repository.impl;
 
 import com.broanex.mes.entity.Cate;
 
 import static com.broanex.mes.entity.QCate.cate;
 
+import com.broanex.mes.repository.CateQueryRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

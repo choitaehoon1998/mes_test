@@ -1,7 +1,8 @@
-package com.broanex.mes.repository;
+package com.broanex.mes.repository.impl;
 
 import com.broanex.mes.Enum.useStatus.UseStatus;
 import com.broanex.mes.entity.Good;
+import com.broanex.mes.repository.GoodQueryRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
