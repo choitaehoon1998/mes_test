@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 //PostMapping(value="goodCate")   -> goodCate를 저장하는 메소드
@@ -22,8 +23,8 @@ public class GoodCateController {
         this.goodCateService = goodCateService;
     }
 
-    @PostMapping(value = "goodCate", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> saveGoodCate(@RequestBody GoodCateRequestDto requestDto) {
+    @PostMapping(value = "goodCate", consumes = MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> saveGoodCate(GoodCateRequestDto requestDto) {
         goodCateService.saveGoodCate(requestDto);
         return ok(null);
     }

@@ -6,7 +6,9 @@ import com.broanex.mes.entity.GoodOp;
 import com.broanex.mes.repository.GoodOpRepository;
 import com.broanex.mes.repository.GoodRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,10 +25,16 @@ import java.util.List;
 public class GoodService {
     private final GoodRepository goodRepository;
     private final GoodOpRepository goodOpRepository;
+    private final FileService fileService;
+    private final GoodImageService goodImageService;
 
-    public GoodService(GoodRepository goodRepository, GoodOpRepository goodOpRepository) {
+    public GoodService(GoodRepository goodRepository,
+                       GoodOpRepository goodOpRepository,
+                       FileService fileService, GoodImageService goodImageService) {
         this.goodRepository = goodRepository;
         this.goodOpRepository = goodOpRepository;
+        this.fileService = fileService;
+        this.goodImageService = goodImageService;
     }
 
     private boolean isExist(Long indexNo) {
@@ -48,7 +56,13 @@ public class GoodService {
         return GoodsList;
     }
 
-    public void saveOrUpdateGoods(Good goods) {
+    public void saveOrUpdateWithFiles(Good goods, List<MultipartFile> filesList) throws IOException {
+        goods = saveOrUpdateGoods(goods);
+        HashMap<String, String> filePathHashMap = fileService.uploadFiles(filesList);
+        goodImageService.saveGoodImages(goods,filePathHashMap);
+    }
+
+    private Good saveOrUpdateGoods(Good goods) {
         // 1. 신규로 (상품 1, 상품 옵션 1,2,3)을 저장한뒤,
         // 업데이트로 (상품 1, 상품 옵션 2,3) 을 보냈을경우 상품 옵션 1은 여전히 남아있음
         // GoodOP 관련 DELETE 부분을 추가하여 삭제하고싶을경우 해당하는 메소드를 이용하도록 .
@@ -62,7 +76,7 @@ public class GoodService {
         if (goods.getRegidate() == null) {
             goods.setRegidate(LocalDateTime.now());
         }
-        goodRepository.save(goods);
+        return goodRepository.save(goods);
     }
 
     public void deleteGoods(Good goods) {

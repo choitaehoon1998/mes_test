@@ -44,4 +44,6 @@ public class Good {
     @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
     private List<GoodCate> goodCateList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
+    private List<GoodImage> goodImageList = new ArrayList<>();
 }

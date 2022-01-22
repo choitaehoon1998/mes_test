@@ -1,4 +1,7 @@
 spring:
+  file:
+    upload:
+      filePath: /uploadDir
   datasource:
     driver-class-name:
     url: jdbc:mysql://116.125.120.103:3306/mestest?serverTimezone=UTC&characterEncoding=UTF-8
@@ -24,4 +27,3 @@ logging:
       hibernate:
         SQL: DEBUG
         type: trace
-

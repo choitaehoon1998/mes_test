@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 //DeleteMapping(value="goodOp") -> goodOp를 삭제하는 메서드 ,
@@ -32,8 +33,8 @@ public class GoodOpController {
         return ok(undeletedGoodOp);
     }
 
-    @PostMapping(value = "goodOp", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateGoodsOp(@RequestBody GoodOp goodOp) {
+    @PostMapping(value = "goodOp", consumes = MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> updateGoodsOp(GoodOp goodOp) {
         goodOpService.updateGoodOp(goodOp);
         return ok(null);
     }

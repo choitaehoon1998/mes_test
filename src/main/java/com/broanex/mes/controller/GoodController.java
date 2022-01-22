@@ -6,10 +6,13 @@ import com.broanex.mes.service.GoodService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 //GetMapping(value="goods")                  -> Good를 조회하는 메소드
@@ -40,9 +43,11 @@ public class GoodController {
         return ok(GoodsList);
     }
 
-    @PostMapping(value = "goods", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> postGoods(@RequestBody Good goods) {
-        goodService.saveOrUpdateGoods(goods);
+    @PostMapping(value = "goods", consumes = MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> postGoods(@RequestPart(value = "good") Good goods,
+                                          @RequestPart(value = "file", required = false) List<MultipartFile> fileList)
+            throws IOException {
+        goodService.saveOrUpdateWithFiles(goods, fileList);
         return ok(null);
     }
 

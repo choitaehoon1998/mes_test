@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 //GetMapping(value:Cate)    -> Cate를 조회하는 메소드
@@ -38,8 +38,8 @@ public class CateController {
         return ok(cateList);
     }
 
-    @PostMapping(value = "cate", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> postsCate(@RequestBody Cate cate) {
+    @PostMapping(value = "cate", consumes = MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> postsCate(Cate cate) {
         cateService.saveOrUpdate(cate);
         return ok(null);
     }

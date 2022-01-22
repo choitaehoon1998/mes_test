@@ -30,6 +30,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-logging'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.5'
 }
 
 def querydslDir = "$buildDir/generated/querydsl"
