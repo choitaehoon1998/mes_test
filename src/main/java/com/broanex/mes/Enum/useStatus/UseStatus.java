@@ -1,9 +1,12 @@
 package com.broanex.mes.Enum.useStatus;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES상의 YN으로 구성되는 값들을 보기 쉽게 하기 위하여 만든 ENUM
+ * 관련 DB 테이블 :  없음
+ * */
 
 import com.broanex.mes.Enum.CodeValue;
-
-// Good에서 UseOp라는 컬럼에서 사용하는 Enum
 
 public enum UseStatus implements CodeValue {
     Y("Y", "사용"),

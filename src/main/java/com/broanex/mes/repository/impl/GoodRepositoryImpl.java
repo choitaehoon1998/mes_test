@@ -1,5 +1,12 @@
 package com.broanex.mes.repository.impl;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES의 상품을 관리하는 Repository 역활을 한다.
+ * 관련 DB 테이블 :  mes_goods
+ * */
+
+
 import com.broanex.mes.Enum.useStatus.UseStatus;
 import com.broanex.mes.entity.Good;
 import com.broanex.mes.repository.GoodQueryRepository;
@@ -14,8 +21,14 @@ import java.util.List;
 import static com.broanex.mes.entity.QGood.good;
 import static com.broanex.mes.entity.QGoodOp.goodOp;
 
-// findAllUsingQueryDsl  -> indexNo, gname,account,useOp를 통하여 good을 검색하는 메소드
-// 이하 private 메소드     -> 검색 조건을 처리하기위한 메소드
+/*
+ * 동작방식 (R: RETURN TYPE, P: PARAMETER TYPE)
+ * 1. findAllUsingQueryDsl R:[List<Good>] P:[HashMap<String,Object>]  : mes_goods 에서 hashMap 에 담긴 정보들에 부합하는 정보들만 조회한다.
+ * 2. eqIndexNo R:[BooleanExpression] P:[Long]                        : indexNo가 같은것을 조회하기위하여 사용하는 메서드
+ * 3. eqGName R:[BooleanExpression] P:[String]                        : gName을 포함하는것을 조회하기위하여 사용하는 메서드
+ * 4. eqAccount R:[BooleanExpression] P:[Long]                        : account가 같은것을 조회하기위하여 사용하는 메서드
+ * 5. eqUseOp R:[BooleanExpression] P:[UseStatus]                     : useop가 같은것을 조회하기위하여 사용하는 메서드
+ */
 
 @RequiredArgsConstructor
 public class GoodRepositoryImpl implements GoodQueryRepository {

@@ -1,5 +1,11 @@
 package com.broanex.mes.controller;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES의 파일을 관리하는 CONTROLLER 역활을 한다.
+ * 관련 DB 테이블 : 없음.
+ * */
+
 import com.broanex.mes.service.FileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
+
+/*
+ * 동작방식
+ * 1. /file  [POST]   : 여러개의 file를 post 로 전송받아 서버에 올리고, file명과 file의 위치를 Map형식으로 리턴한다.
+ *                      ex: { 파일명: 파일위치 }
+ */
 
 @RestController
 public class FileController {

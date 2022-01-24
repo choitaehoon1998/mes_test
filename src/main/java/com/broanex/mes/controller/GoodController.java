@@ -1,5 +1,11 @@
 package com.broanex.mes.controller;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES의 상품을 관리하는 CONTROLLER 역활을 한다.
+ * 관련 DB 테이블 : mes_goods , mes_goods_op
+ * */
+
 import com.broanex.mes.Enum.useStatus.UseStatus;
 import com.broanex.mes.entity.Good;
 import com.broanex.mes.service.GoodService;
@@ -15,12 +21,14 @@ import java.util.List;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
-//GetMapping(value="goods")                  -> Good를 조회하는 메소드
-//PostMapping(value="goods")                 -> Good를 저장하거나 업데이트하는 메소드
-//PutMapping(value="goods")                  -> Good를 업데이트하는 메소드
-//DeleteMapping(value="goods")               -> Good를 삭제하는 메소드
-//DeleteMapping(value="goods/{seq}/goodsOp") -> Good의 pk로 goodsOp를 삭제하는 메소드
-
+/*
+ * 동작방식
+ * 1. /goods                [GET]    : good의 정보를 인자(gname, indexNo, account,useop)로 받아 mes_goods에서 조회후, JSON 형태로 리턴해준다.
+ * 2. /goods                [POST]   : good의 정보를 form-date 형태로 post 로 전달받아 mes_goods 에 저장후 , image 가 있을경우 서버에 해당 파일을 저장하고 mes_goods_img 테이블에 삽입
+ * 3. /goods                [PUT]    : good의 정보를 전달받아 mes_goods에 해당하는 내용을 업데이트한다..
+ * 4. /goods                [DELETE] : good의 정보를 전달받아 해당하는 내용을 mes_goods 에서 삭제한다.
+ * 5. /goods/{seq}/goodsOp  [DELETE] : uri 정보로 전달받은 good의 Index의 해당하는 goodsOp의 내용을 전체 삭제한다.
+ */
 @RestController
 public class GoodController {
     private final GoodService goodService;
@@ -47,7 +55,7 @@ public class GoodController {
     public ResponseEntity<HashMap<String, String>> postGoods(@RequestPart(value = "good") Good goods,
                                                              @RequestPart(value = "fileList", required = false) List<MultipartFile> fileList)
             throws IOException {
-        HashMap<String, String> stringHashMap = goodService.saveOrUpdateWithFiles(goods, fileList);
+        HashMap<String, String> stringHashMap = goodService.saveWithFiles(goods, fileList);
         return ok(stringHashMap);
     }
 

@@ -1,5 +1,11 @@
 package com.broanex.mes.service;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES의 상품 추가 정보를 관리하는 Service 역활을 한다.
+ * 관련 DB 테이블 :  mes_goods_op
+ * */
+
 import com.broanex.mes.entity.GoodOp;
 import com.broanex.mes.repository.GoodOpRepository;
 import org.springframework.stereotype.Service;
@@ -7,9 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-// isExist         -> 파라미터로 전달받은 goodOp가 DB에 실제로 존재하는 메서드 인지 확인함.
-// deleteAllByList -> 파라미터로 전달받은 goodOp 리스트 전부 삭제함 , 삭제되지 않은 리스트는 다시 리턴함.
-// updateGoodOp    -> 파라미터로 전달받은 goodOp를 업데이트함.
+/*
+ * 동작방식 (R: RETURN TYPE, P: PARAMETER TYPE)
+ * 1. isExist R:[Boolean] P:[GoodOp]                     : 파라미터로 전달받은 goodOp가 DB에 실제로 존재여부 확인하는 메서드.
+ * 2. deleteAllByList R:[List<GoodOp>] P:[List<GoodOp>]  : 파라미터로 전달받은 goodOp 리스트 전부 삭제함 , 삭제되지 않은 리스트는 다시 리턴.
+ * 3. updateGoodOp R:[없음] P:[GoodOp]                    : 파라미터로 전달받은 goodOp를 업데이트함
+ */
 
 @Service
 public class GoodOpService {

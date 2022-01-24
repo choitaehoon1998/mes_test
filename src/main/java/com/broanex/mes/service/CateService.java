@@ -1,5 +1,12 @@
 package com.broanex.mes.service;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES의 카테고리를 관리하는 Service 역활을 한다.
+ * 관련 DB 테이블 :  mes_cate
+ * */
+
+
 import com.broanex.mes.entity.Cate;
 import com.broanex.mes.repository.CateRepository;
 import org.springframework.stereotype.Service;
@@ -7,13 +14,17 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 
-// isExist            -> 파라미터로 전달 받은 cate가 DB에 존재하는 Cate인지 확인하는 메서드
-// isExistByCateCode  -> 파라미터로 전달 받은 cate의 해당하는 cateCode가 DB에 존재하는 Cate인지 확인하는 메서드
-// createCateCode     -> 파라미터로 전달받은 parentCateCode를 통하여, 하위 CateCode를 생성함
-//                       파리미터로 전달받은 parentCateCode가 5자리 초과라면 IllegalArugement Exception을 던짐
-// findAllCategory    -> 전달 받은 파리미터로 모든 category 를 검색함
-// saveOrUpdate       -> 전달 받은 파리미터를 저장하거나 , 업데이트 함
-// deleteCategory     -> 전달 받은 파라미터를 삭제함 .
+/*
+ * 동작방식 (R: RETURN TYPE, P: PARAMETER TYPE)
+ * 1. isExist R:[Cate] P:[boolean]                                : 파라미터로 전달 받은 cate가 DB에 존재하는 Cate인지 확인하는 메서드
+ * 2. isExistByCateCode R:[Cate] P:[boolean]                      : 파라미터로 전달 받은 cate의 해당하는 cateCode가 DB에 존재하는 Cate인지 확인하는 메서드
+ * 3. createCateCode R:[String] P:[String]                        : 파라미터로 전달받은 parentCateCode를 통하여, 하위 CateCode를 생성함
+ *                                                                  파리미터로 전달받은 parentCateCode가 5자리 초과라면 IllegalArugement Exception을 던짐
+ * 4. findAllCategory R:[List<Cate>] P:[HashMap<String, Object>]  : 전달 받은 파리미터로 모든 category 를 검색함
+ * 5. saveOrUpdate R:[없음] P:[Cate]                               : 전달 받은 파리미터를 저장하거나 , 업데이트 함
+ * 6. deleteCategory R:[없음] P:[Cate]                             : 전달 받은 파라미터를 삭제함 .
+ */
+
 
 @Service
 public class CateService {

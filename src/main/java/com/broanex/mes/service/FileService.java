@@ -1,5 +1,11 @@
 package com.broanex.mes.service;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES 의 파일을 관리하는 Service 역활을 한다.
+ * 관련 DB 테이블 :  없음
+ * */
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -13,6 +19,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+
+/*
+ * 동작방식 (R: RETURN TYPE, P: PARAMETER TYPE)
+ * 1. ToFile R:[File] P:[MultipartFile]                                 : MultiPartFile을 File로 변경해줌
+ * 2. getSavePath R:[String] P:[saveName]                               : 저장될 이름을 파라미터로 제공하면, 저장 위치를 리턴함.
+ * 3. uploadFiles R:[HashMap<String, String>] P:[List<MultipartFile> ]  : FIle을 서버에 업로드함.
+ */
 
 @Service
 @Slf4j

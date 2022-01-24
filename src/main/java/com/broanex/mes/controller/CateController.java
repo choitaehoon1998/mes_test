@@ -1,5 +1,11 @@
 package com.broanex.mes.controller;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES의 카테고리를 관리하는 CONTROLLER 역활을 한다.
+ * 관련 DB 테이블 : mes_cate
+ * */
+
 import com.broanex.mes.entity.Cate;
 import com.broanex.mes.service.CateService;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +17,12 @@ import java.util.List;
 import static org.springframework.http.MediaType.*;
 import static org.springframework.http.ResponseEntity.ok;
 
-//GetMapping(value:Cate)    -> Cate를 조회하는 메소드
-//PostMapping(value:Cate)   -> Cate를 저장하거나, 업데이트 하는 메소드
-//DeleteMapping(value:Cate) -> Cate를 삭제하는 메소드
-
+/*
+ * 동작방식
+ * 1. /cate  [GET]    : 카테고리의 필드(indexNo,cateName,cateCode,upccate)들을 인자로 받아 JSON 형태로 리턴해준다.
+ * 2. /cate  [POST]   : 카테고리의 정보를 인자로 받아 mes_cate 에 INSERT 한다.
+ * 3. /cate  [DELETE] : 카테고리의 indexNo를 인자로 받아 mes_cate 에서 DELETE 한다.
+ */
 @RestController
 public class CateController {
 

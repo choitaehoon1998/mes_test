@@ -1,5 +1,11 @@
 package com.broanex.mes.service;
 
+/*
+ * 코드작성자 : 최태훈
+ * 소스설명 : MES의 상품을 관리하는 Service 역활을 한다.
+ * 관련 DB 테이블 :  mes_goods , mes_goods_op , mes_goods_image
+ * */
+
 import com.broanex.mes.Enum.useStatus.UseStatus;
 import com.broanex.mes.entity.Good;
 import com.broanex.mes.entity.GoodOp;
@@ -14,13 +20,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-// isExist                 -> 파리미터로 전달받은 goodIndexNo가 db에 실제로 존재하는지 확인함.
-// isUse                   -> 파라미터로 전달받은 useStauts 가 Y가 맞는지 확인함.
-// findAllGoods            -> 파리미터로 전달받은 값들을 통하여 Good 를 조회함.
-// saveOrUpdateGoods       -> 파라미터로 전달받은 good 을 업데이트하거나, 저장함.
-// deleteGoods             -> goods를 삭제함
-// updateGoods             -> goods을 업데이트함.
-// deleteGoodsOpByGoodsIdx -> goodIdx에 해당하는 goodsOp를 전부 삭제함.
+/*
+ * 동작방식 (R: RETURN TYPE, P: PARAMETER TYPE)
+ * 1. isExist R:[boolean] P:[Long]                                              : 파리미터로 전달받은 goodIndexNo가 db에 실제로 존재하는지 확인함.
+ * 2. isUse R:[boolean] P:[UseStatus]                                           : 파라미터로 전달받은 useStauts 가 Y가 맞는지 확인함.
+ * 3. findAllGoods R:[List<Good>] P:[HashMap<String, Object>]                   : 파리미터로 전달받은 값들을 통하여 Good 를 조회함.
+ * 4. saveWithFiles R:[HashMap<String, String>] P:[Good , List<MultipartFile>]  : 파라미터로 전달받은 good 과 File을 저장하고, 파일명과 , 파일의 위치를 Map 형식으로 리턴함 (ex: 파일명 : 파일위치 )
+ * 5. saveOrUpdateGoods R:[Good] P:[GoodCateRequestDto]                         : 파라미터로 전달받은 good 을 업데이트하거나, 저장함.
+ * 6. deleteGoods R:[없음] P:[Good]                                              : goods를 삭제함
+ * 7. updateGoods R:[없음] P:[Good]                                              : goods을 업데이트함.
+ * 8. deleteGoodsOpByGoodsIdx R:[없음] P:[Long]                                  : goodIdx에 해당하는 goodsOp를 전부 삭제함.
+ */
+
 @Service
 public class GoodService {
     private final GoodRepository goodRepository;
@@ -56,7 +67,7 @@ public class GoodService {
         return GoodsList;
     }
 
-    public HashMap<String, String> saveOrUpdateWithFiles(Good goods, List<MultipartFile> filesList) throws IOException {
+    public HashMap<String, String> saveWithFiles(Good goods, List<MultipartFile> filesList) throws IOException {
         goods = saveOrUpdateGoods(goods);
         HashMap<String, String> filePathHashMap = fileService.uploadFiles(filesList);
         goodImageService.saveGoodImages(goods, filePathHashMap);
