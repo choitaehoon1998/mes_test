@@ -56,10 +56,11 @@ public class GoodService {
         return GoodsList;
     }
 
-    public void saveOrUpdateWithFiles(Good goods, List<MultipartFile> filesList) throws IOException {
+    public HashMap<String, String> saveOrUpdateWithFiles(Good goods, List<MultipartFile> filesList) throws IOException {
         goods = saveOrUpdateGoods(goods);
         HashMap<String, String> filePathHashMap = fileService.uploadFiles(filesList);
-        goodImageService.saveGoodImages(goods,filePathHashMap);
+        goodImageService.saveGoodImages(goods, filePathHashMap);
+        return filePathHashMap;
     }
 
     private Good saveOrUpdateGoods(Good goods) {

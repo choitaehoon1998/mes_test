@@ -44,11 +44,11 @@ public class GoodController {
     }
 
     @PostMapping(value = "goods", consumes = MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> postGoods(@RequestPart(value = "good") Good goods,
-                                          @RequestPart(value = "file", required = false) List<MultipartFile> fileList)
+    public ResponseEntity<HashMap<String, String>> postGoods(@RequestPart(value = "good") Good goods,
+                                                             @RequestPart(value = "fileList", required = false) List<MultipartFile> fileList)
             throws IOException {
-        goodService.saveOrUpdateWithFiles(goods, fileList);
-        return ok(null);
+        HashMap<String, String> stringHashMap = goodService.saveOrUpdateWithFiles(goods, fileList);
+        return ok(stringHashMap);
     }
 
     @PutMapping(value = "goods", produces = MediaType.APPLICATION_JSON_VALUE)

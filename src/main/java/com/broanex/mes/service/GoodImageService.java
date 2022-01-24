@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.OptionalLong;
 
 @Service
 public class GoodImageService {
@@ -18,11 +19,12 @@ public class GoodImageService {
     }
 
     public void saveGoodImages(Good goods, HashMap<String, String> filePathHashMap) {
-        List<GoodImage> goodImageList = new ArrayList<>();
-        for(String key: filePathHashMap.keySet()){
-            System.out.println(key);
-            System.out.println(filePathHashMap.get(key));
-            GoodImage.builder().good(goods).filename(key).build();
+        Long orders = 1L;
+        Long lastIndex = goodImageRepository.getLastIndexOfGoodImage().orElse(0L);
+
+        for (String key : filePathHashMap.keySet()) {
+            GoodImage goodImage = GoodImage.builder().indexNo(++lastIndex).good(goods).filename(key).order(orders++).build();
+            goodImageRepository.save(goodImage);
         }
     }
 }
