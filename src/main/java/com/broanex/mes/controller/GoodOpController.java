@@ -27,21 +27,21 @@ import static org.springframework.http.ResponseEntity.ok;
  */
 @RestController
 public class GoodOpController {
-    private final GoodOpService goodOpService;
+	private final GoodOpService goodOpService;
 
-    public GoodOpController(GoodOpService goodOpService) {
-        this.goodOpService = goodOpService;
-    }
+	public GoodOpController(GoodOpService goodOpService) {
+		this.goodOpService = goodOpService;
+	}
 
-    @DeleteMapping(value = "goodOp", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GoodOp>> deleteGoodsOp(@RequestBody List<GoodOp> goodopList) {
-        List<GoodOp> undeletedGoodOp = goodOpService.deleteAllByList(goodopList);
-        return ok(undeletedGoodOp);
-    }
+	@DeleteMapping(value = "goodOp", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<GoodOp>> deleteGoodsOp(@RequestBody List<GoodOp> goodopList) {
+		List<GoodOp> undeletedGoodOp = goodOpService.deleteAllByList(goodopList);
+		return ok(undeletedGoodOp);
+	}
 
-    @PostMapping(value = "goodOp", consumes = MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> updateGoodsOp(GoodOp goodOp) {
-        goodOpService.updateGoodOp(goodOp);
-        return ok(null);
-    }
+	@PostMapping(value = "goodOp", consumes = MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<Void> updateGoodsOp(GoodOp goodOp) {
+		goodOpService.updateGoodOp(goodOp);
+		return ok(null);
+	}
 }

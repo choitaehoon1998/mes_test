@@ -19,21 +19,21 @@ import java.util.List;
 @Setter
 @Table(name = "mes_cate")
 public class Cate implements Serializable {
-    @Id
-    @Column(name = "index_no")
-    private Long indexNo;
+	@Id
+	@Column(name = "index_no")
+	private Long indexNo;
 
-    @Column(name = "catename")
-    private String cateName;
+	@Column(name = "catename")
+	private String cateName;
 
-    @Column(name = "catecode")
-    private String catecode;
+	@Column(name = "catecode")
+	private String catecode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "upccate",
-            referencedColumnName = "catecode")
-    private Cate parentCate;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "upccate",
+			referencedColumnName = "catecode")
+	private Cate parentCate;
 
-    @OneToMany(mappedBy = "parentCate", cascade = CascadeType.ALL)
-    private List<Cate> childCateList = new ArrayList<>();
+	@OneToMany(mappedBy = "parentCate", cascade = CascadeType.ALL)
+	private List<Cate> childCateList = new ArrayList<>();
 }

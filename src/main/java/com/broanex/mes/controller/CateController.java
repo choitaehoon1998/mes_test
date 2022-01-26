@@ -11,6 +11,7 @@ import com.broanex.mes.service.CateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,36 +27,42 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 public class CateController {
 
-    private final CateService cateService;
+	private final CateService cateService;
 
-    public CateController(CateService cateService) {
-        this.cateService = cateService;
-    }
+	public CateController(CateService cateService) {
+		this.cateService = cateService;
+	}
 
-    @GetMapping(value = "cate", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Cate>> getCategory(@RequestParam(required = false) Long indexNo,
-                                                  @RequestParam(required = false) String cateName,
-                                                  @RequestParam(required = false) String cateCode,
-                                                  @RequestParam(required = false) Long upccate) {
-        List<Cate> cateList = cateService.findAllCategory(new HashMap<String, Object>() {{
-            put("indexNo", indexNo);
-            put("cateName", cateName);
-            put("cateCode", cateCode);
-            put("upccate", upccate);
-        }});
-        return ok(cateList);
-    }
+	@GetMapping(value = "cate", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Cate>> getCategory(@RequestParam(required = false) Long indexNo,
+	                                              @RequestParam(required = false) String cateName,
+	                                              @RequestParam(required = false) String cateCode,
+	                                              @RequestParam(required = false) Long upccate) {
+		List<Cate> cateList = cateService.findAllCategory(new HashMap<String, Object>() {{
+			put("indexNo", indexNo);
+			put("cateName", cateName);
+			put("cateCode", cateCode);
+			put("upccate", upccate);
+		}});
+		return ok(cateList);
+	}
 
-    @PostMapping(value = "cate", consumes = MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> postsCate(Cate cate) {
-        cateService.saveOrUpdate(cate);
-        return ok(null);
-    }
+	@PostMapping(value = "cate", consumes = MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<Void> postsCate(Cate cate) {
+		cateService.saveOrUpdate(cate);
+		return ok(null);
+	}
 
-    @DeleteMapping(value = "cate", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteCate(@RequestBody Cate cate) {
-        cateService.deleteCategory(cate);
-        return ok(null);
-    }
+	@DeleteMapping(value = "cate", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> deleteCate(@RequestBody Cate cate) {
+		cateService.deleteCategory(cate);
+		return ok(null);
+	}
 
+	@PostMapping(value = "exceptionTest")
+	public void exceptionTest(HttpServletRequest request) {
+		System.out.println(request.getAuthType());
+		request.getContextPath();
+		throw new ArithmeticException("aabbccddeeff");
+	}
 }

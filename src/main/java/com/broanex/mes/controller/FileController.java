@@ -28,16 +28,16 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 @RestController
 public class FileController {
-    private final FileService fileService;
+	private final FileService fileService;
 
-    public FileController(FileService fileService) {
-        this.fileService = fileService;
-    }
+	public FileController(FileService fileService) {
+		this.fileService = fileService;
+	}
 
-    @PostMapping(value = "file", consumes = MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<HashMap<String, String>> uploadFileList(@RequestPart(value = "fileList") List<MultipartFile> fileList) throws IOException {
-        HashMap<String, String> filePathMap = fileService.uploadFiles(fileList);
-        return ResponseEntity.ok(filePathMap);
-    }
+	@PostMapping(value = "file", consumes = MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<HashMap<String, String>> uploadFileList(@RequestPart(value = "fileList") List<MultipartFile> fileList) throws IOException {
+		HashMap<String, String> filePathMap = fileService.uploadFiles(fileList);
+		return ResponseEntity.ok(filePathMap);
+	}
 
 }

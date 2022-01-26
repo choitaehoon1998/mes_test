@@ -18,16 +18,16 @@ import javax.persistence.*;
 @Builder
 @Table(name = "mes_goods_cate")
 public class GoodCate {
-    @Id
-    @Column(name = "index_no")
-    private Long indexNo;
+	@Id
+	@Column(name = "index_no")
+	private Long indexNo;
 
-    @ManyToOne
-    @JoinColumn(name = "goods_idx")
-    private Good good;
+	@ManyToOne
+	@JoinColumn(name = "goods_idx")
+	private Good good;
 
-    @ManyToOne
-    @JoinColumn(name = "catecode",
-            referencedColumnName = "catecode")
-    private Cate cate;
+	@ManyToOne
+	@JoinColumn(name = "catecode",
+			referencedColumnName = "catecode")
+	private Cate cate;
 }

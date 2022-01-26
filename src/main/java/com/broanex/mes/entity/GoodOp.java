@@ -16,19 +16,19 @@ import javax.persistence.*;
 @Table(name = "mes_goods_op")
 public class GoodOp {
 
-    @Id
-    @Column(name = "index_no")
-    private Long indexNo;
+	@Id
+	@Column(name = "index_no")
+	private Long indexNo;
 
-    @ManyToOne
-    @JoinColumn(name = "goods_idx")
-    @JsonIgnore
-    private Good good;
+	@ManyToOne
+	@JoinColumn(name = "goods_idx")
+	@JsonIgnore
+	private Good good;
 
-    @Column(name = "opname")
-    private String opname;
+	@Column(name = "opname")
+	private String opname;
 
-    @Column(name = "opaccount")
-    private Long opaccount;
+	@Column(name = "opaccount")
+	private Long opaccount;
 
 }

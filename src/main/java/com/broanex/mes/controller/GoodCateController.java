@@ -25,21 +25,21 @@ import static org.springframework.http.ResponseEntity.ok;
  */
 @RestController
 public class GoodCateController {
-    private final GoodCateService goodCateService;
+	private final GoodCateService goodCateService;
 
-    public GoodCateController(GoodCateService goodCateService) {
-        this.goodCateService = goodCateService;
-    }
+	public GoodCateController(GoodCateService goodCateService) {
+		this.goodCateService = goodCateService;
+	}
 
-    @PostMapping(value = "goodCate", consumes = MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> saveGoodCate(GoodCateRequestDto requestDto) {
-        goodCateService.saveGoodCate(requestDto);
-        return ok(null);
-    }
+	@PostMapping(value = "goodCate", consumes = MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<Void> saveGoodCate(GoodCateRequestDto requestDto) {
+		goodCateService.saveGoodCate(requestDto);
+		return ok(null);
+	}
 
-    @DeleteMapping(value = "goodCate", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteGoodCate(@RequestBody GoodCateRequestDto requestDto) {
-        goodCateService.deleteGoodCate(requestDto);
-        return ok(null);
-    }
+	@DeleteMapping(value = "goodCate", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> deleteGoodCate(@RequestBody GoodCateRequestDto requestDto) {
+		goodCateService.deleteGoodCate(requestDto);
+		return ok(null);
+	}
 }

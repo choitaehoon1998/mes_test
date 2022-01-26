@@ -21,16 +21,16 @@ import static com.broanex.mes.entity.QGoodImage.goodImage;
 
 @RequiredArgsConstructor
 public class GoodImageRepositoryImpl implements GoodImageQueryRepository {
-    private final JPAQueryFactory queryFactory;
+	private final JPAQueryFactory queryFactory;
 
-    @Override
-    public Optional<Long> getLastIndexOfGoodImage() {
-        return Optional.ofNullable(
-                queryFactory
-                        .select(goodImage.indexNo)
-                        .from(goodImage)
-                        .orderBy(goodImage.indexNo.desc())
-                        .fetchFirst()
-        );
-    }
+	@Override
+	public Optional<Long> getLastIndexOfGoodImage() {
+		return Optional.ofNullable(
+				queryFactory
+						.select(goodImage.indexNo)
+						.from(goodImage)
+						.orderBy(goodImage.indexNo.desc())
+						.fetchFirst()
+		);
+	}
 }

@@ -31,48 +31,48 @@ import java.util.UUID;
 @Slf4j
 public class FileService implements InitializingBean {
 
-    @Value("${spring.file.upload.filePath}")
-    private String FilePath;
+	@Value("${spring.file.upload.filePath}")
+	private String FilePath;
 
-    private File ToFile(MultipartFile multipartFile) throws IOException {
-        String baseDir = System.getProperty("java.io.tmpdir") + "/" + UUID.randomUUID();
+	private File ToFile(MultipartFile multipartFile) throws IOException {
+		String baseDir = System.getProperty("java.io.tmpdir") + "/" + UUID.randomUUID();
 
-        org.apache.commons.io.FileUtils.forceMkdir(new File(baseDir));
+		org.apache.commons.io.FileUtils.forceMkdir(new File(baseDir));
 
-        String tmpFileName = baseDir + "/" + FilenameUtils.getName(multipartFile.getOriginalFilename());
+		String tmpFileName = baseDir + "/" + FilenameUtils.getName(multipartFile.getOriginalFilename());
 
-        File file = new File(tmpFileName);
+		File file = new File(tmpFileName);
 
-        multipartFile.transferTo(file);
-        return file;
-    }
+		multipartFile.transferTo(file);
+		return file;
+	}
 
-    private String getSavePath(String saveName) {
-        return FilePath + "/" + saveName;
-    }
+	private String getSavePath(String saveName) {
+		return FilePath + "/" + saveName;
+	}
 
-    public HashMap<String, String> uploadFiles(List<MultipartFile> fileList) throws IOException {
-        HashMap<String, String> NamePathMap = new HashMap<>();
-        for (MultipartFile multiPartFile : fileList) {
-            File uploadFile = ToFile(multiPartFile);
-            String fileName = FilenameUtils.getName(uploadFile.getName());
-            String extension = FilenameUtils.getExtension(fileName);
-            String baseName = UUID.randomUUID().toString();
-            String saveName = baseName + "." + extension;
-            String savePath = getSavePath(saveName);
-            File file = new File(savePath);
-            FileUtils.copyFile(uploadFile, file);
-            NamePathMap.put(fileName, savePath);
-        }
-        return NamePathMap;
-    }
+	public HashMap<String, String> uploadFiles(List<MultipartFile> fileList) throws IOException {
+		HashMap<String, String> NamePathMap = new HashMap<>();
+		for (MultipartFile multiPartFile : fileList) {
+			File uploadFile = ToFile(multiPartFile);
+			String fileName = FilenameUtils.getName(uploadFile.getName());
+			String extension = FilenameUtils.getExtension(fileName);
+			String baseName = UUID.randomUUID().toString();
+			String saveName = baseName + "." + extension;
+			String savePath = getSavePath(saveName);
+			File file = new File(savePath);
+			FileUtils.copyFile(uploadFile, file);
+			NamePathMap.put(fileName, savePath);
+		}
+		return NamePathMap;
+	}
 
-    @Override
-    public void afterPropertiesSet() {
-        try {
-            FileUtils.forceMkdir(new File(FilePath));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	@Override
+	public void afterPropertiesSet() {
+		try {
+			FileUtils.forceMkdir(new File(FilePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

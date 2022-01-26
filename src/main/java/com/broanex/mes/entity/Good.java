@@ -21,29 +21,29 @@ import java.util.List;
 @Setter
 @Table(name = "mes_goods")
 public class Good {
-    @Id
-    @Column(name = "index_no")
-    private Long indexNo;
+	@Id
+	@Column(name = "index_no")
+	private Long indexNo;
 
-    @Column(name = "gname")
-    private String gName;
+	@Column(name = "gname")
+	private String gName;
 
-    @Column(name = "account")
-    private Long account;
+	@Column(name = "account")
+	private Long account;
 
-    @Column(name = "useop")
-    @Convert(converter = UseStatusConvertor.class)
-    private UseStatus useOp;
+	@Column(name = "useop")
+	@Convert(converter = UseStatusConvertor.class)
+	private UseStatus useOp;
 
-    @Column(name = "regidate")
-    private LocalDateTime regidate;
+	@Column(name = "regidate")
+	private LocalDateTime regidate;
 
-    @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
-    private List<GoodOp> goodOpList = new ArrayList<>();
+	@OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
+	private List<GoodOp> goodOpList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
-    private List<GoodCate> goodCateList = new ArrayList<>();
+	@OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
+	private List<GoodCate> goodCateList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
-    private List<GoodImage> goodImageList = new ArrayList<>();
+	@OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
+	private List<GoodImage> goodImageList = new ArrayList<>();
 }

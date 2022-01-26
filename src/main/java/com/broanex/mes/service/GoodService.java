@@ -34,82 +34,82 @@ import java.util.List;
 
 @Service
 public class GoodService {
-    private final GoodRepository goodRepository;
-    private final GoodOpRepository goodOpRepository;
-    private final FileService fileService;
-    private final GoodImageService goodImageService;
+	private final GoodRepository goodRepository;
+	private final GoodOpRepository goodOpRepository;
+	private final FileService fileService;
+	private final GoodImageService goodImageService;
 
-    public GoodService(GoodRepository goodRepository,
-                       GoodOpRepository goodOpRepository,
-                       FileService fileService, GoodImageService goodImageService) {
-        this.goodRepository = goodRepository;
-        this.goodOpRepository = goodOpRepository;
-        this.fileService = fileService;
-        this.goodImageService = goodImageService;
-    }
+	public GoodService(GoodRepository goodRepository,
+	                   GoodOpRepository goodOpRepository,
+	                   FileService fileService, GoodImageService goodImageService) {
+		this.goodRepository = goodRepository;
+		this.goodOpRepository = goodOpRepository;
+		this.fileService = fileService;
+		this.goodImageService = goodImageService;
+	}
 
-    private boolean isExist(Long indexNo) {
-        if (indexNo != null && goodRepository.existsById(indexNo)) {
-            return true;
-        }
-        return false;
-    }
+	private boolean isExist(Long indexNo) {
+		if (indexNo != null && goodRepository.existsById(indexNo)) {
+			return true;
+		}
+		return false;
+	}
 
-    private boolean isUse(UseStatus useStatus) {
-        if (useStatus != null && useStatus.getValue().equals(UseStatus.Y.getValue())) {
-            return true;
-        }
-        return false;
-    }
+	private boolean isUse(UseStatus useStatus) {
+		if (useStatus != null && useStatus.getValue().equals(UseStatus.Y.getValue())) {
+			return true;
+		}
+		return false;
+	}
 
-    public List<Good> findAllGoods(HashMap<String, Object> hashMap) {
-        List<Good> GoodsList = goodRepository.findAllUsingQueryDsl(hashMap);
-        return GoodsList;
-    }
+	public List<Good> findAllGoods(HashMap<String, Object> hashMap) {
+		List<Good> GoodsList = goodRepository.findAllUsingQueryDsl(hashMap);
+		return GoodsList;
+	}
 
-    public HashMap<String, String> saveWithFiles(Good goods, List<MultipartFile> filesList) throws IOException {
-        goods = saveOrUpdateGoods(goods);
-        HashMap<String, String> filePathHashMap = fileService.uploadFiles(filesList);
-        goodImageService.saveGoodImages(goods, filePathHashMap);
-        return filePathHashMap;
-    }
+	public HashMap<String, String> saveWithFiles(Good goods, List<MultipartFile> filesList) throws IOException {
+		goods = saveOrUpdateGoods(goods);
+		HashMap<String, String> filePathHashMap = fileService.uploadFiles(filesList);
+		goodImageService.saveGoodImages(goods, filePathHashMap);
+		return filePathHashMap;
+	}
 
-    private Good saveOrUpdateGoods(Good goods) {
-        // 1. 신규로 (상품 1, 상품 옵션 1,2,3)을 저장한뒤,
-        // 업데이트로 (상품 1, 상품 옵션 2,3) 을 보냈을경우 상품 옵션 1은 여전히 남아있음
-        // GoodOP 관련 DELETE 부분을 추가하여 삭제하고싶을경우 해당하는 메소드를 이용하도록 .
-        if (isUse(goods.getUseOp())) {
-            for (GoodOp goodsOp : goods.getGoodOpList()) {
-                goodsOp.setGood(goods);
-            }
-        } else {
-            goods.setGoodOpList(new ArrayList<>());
-        }
-        if (goods.getRegidate() == null) {
-            goods.setRegidate(LocalDateTime.now());
-        }
-        return goodRepository.save(goods);
-    }
+	private Good saveOrUpdateGoods(Good goods) {
+		// 1. 신규로 (상품 1, 상품 옵션 1,2,3)을 저장한뒤,
+		// 업데이트로 (상품 1, 상품 옵션 2,3) 을 보냈을경우 상품 옵션 1은 여전히 남아있음
+		// GoodOP 관련 DELETE 부분을 추가하여 삭제하고싶을경우 해당하는 메소드를 이용하도록 .
+		if (isUse(goods.getUseOp())) {
+			for (GoodOp goodsOp : goods.getGoodOpList()) {
+				goodsOp.setGood(goods);
+			}
+		} else {
+			goods.setGoodOpList(new ArrayList<>());
+		}
+		if (goods.getRegidate() == null) {
+			goods.setRegidate(LocalDateTime.now());
+		}
+		return goodRepository.save(goods);
+	}
 
-    public void deleteGoods(Good goods) {
-        if (isExist(goods.getIndexNo())) {
-            goodRepository.deleteById(goods.getIndexNo());
-        }
-    }
+	public void deleteGoods(Good goods) {
+		if (isExist(goods.getIndexNo())) {
+			goodRepository.deleteById(goods.getIndexNo());
+		}
+	}
 
-    public void updateGoods(Good goods) {
-        if (isExist(goods.getIndexNo())) {
-            saveOrUpdateGoods(goods);
-        }
-    }
+	public void updateGoods(Good goods) {
+		if (isExist(goods.getIndexNo())) {
+			saveOrUpdateGoods(goods);
+		}
+	}
 
-    public void deleteGoodsOpByGoodsIdx(Long goodsIdx) {
-        if (isExist(goodsIdx)) {
-            List<Long> goodOpIdxList = goodOpRepository.findAllGoodOpIdxByGoodsIdxUsingQueryDsl(goodsIdx);
-            for (Long goodOpsIdx : goodOpIdxList) {
-                goodOpRepository.deleteById(goodOpsIdx);
-            }
-        }
-    }
+	public void deleteGoodsOpByGoodsIdx(Long goodsIdx) {
+		if (isExist(goodsIdx)) {
+			List<Long> goodOpIdxList = goodOpRepository.findAllGoodOpIdxByGoodsIdxUsingQueryDsl(goodsIdx);
+			for (Long goodOpsIdx : goodOpIdxList) {
+				goodOpRepository.deleteById(goodOpsIdx);
+			}
+		}
+	}
 
 }

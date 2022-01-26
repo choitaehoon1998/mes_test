@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface CateQueryRepository {
-    List<Cate> findAllCategory(HashMap<String, Object> hashMap);
+	List<Cate> findAllCategory(HashMap<String, Object> hashMap);
 
-    List<String> findCateCodeByCateCode(String parentCateCode);
+	List<String> findCateCodeByCateCode(String parentCateCode);
 
-    boolean existsByCateCode(String catecode);
+	boolean existsByCateCode(String catecode);
 }

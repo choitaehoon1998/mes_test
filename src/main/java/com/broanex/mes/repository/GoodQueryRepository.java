@@ -6,5 +6,5 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface GoodQueryRepository {
-    List<Good> findAllUsingQueryDsl(HashMap<String, Object> hashMap);
+	List<Good> findAllUsingQueryDsl(HashMap<String, Object> hashMap);
 }

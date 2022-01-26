@@ -14,19 +14,19 @@ import javax.persistence.*;
 @Setter
 @Table(name = "mes_goods_img")
 public class GoodImage {
-    @Id
-    @Column(name = "index_no")
-    private Long indexNo;
+	@Id
+	@Column(name = "index_no")
+	private Long indexNo;
 
-    @Column(name = "filename")
-    private String filename;
+	@Column(name = "filename")
+	private String filename;
 
-    @Column(name = "orders")
-    private Long order;
+	@Column(name = "orders")
+	private Long order;
 
-    @ManyToOne
-    @JoinColumn(name = "goods_idx")
-    @JsonIgnore
-    private Good good;
+	@ManyToOne
+	@JoinColumn(name = "goods_idx")
+	@JsonIgnore
+	private Good good;
 
 }

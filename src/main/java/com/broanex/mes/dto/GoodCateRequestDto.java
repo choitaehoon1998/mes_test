@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GoodCateRequestDto {
-    private Long indexNo;
-    private Long goodsIdx;
-    private String catecode;
+	private Long indexNo;
+	private Long goodsIdx;
+	private String catecode;
 }
