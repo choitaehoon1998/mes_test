@@ -9,10 +9,7 @@ package com.broanex.mes.controller;
 import com.broanex.mes.dto.GoodCateRequestDto;
 import com.broanex.mes.service.GoodCateService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
@@ -32,7 +29,7 @@ public class GoodCateController {
 	}
 
 	@PostMapping(value = "goodCate", consumes = MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<Void> saveGoodCate(GoodCateRequestDto requestDto) {
+	public ResponseEntity<Void> saveGoodCate(@RequestPart(value = "requestDto") GoodCateRequestDto requestDto) {
 		goodCateService.saveGoodCate(requestDto);
 		return ok(null);
 	}

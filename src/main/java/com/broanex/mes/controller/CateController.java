@@ -11,11 +11,11 @@ import com.broanex.mes.service.CateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.springframework.http.MediaType.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 /*
@@ -48,7 +48,7 @@ public class CateController {
 	}
 
 	@PostMapping(value = "cate", consumes = MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<Void> postsCate(Cate cate) {
+	public ResponseEntity<Void> postsCate(@RequestPart(value = "cate") Cate cate) {
 		cateService.saveOrUpdate(cate);
 		return ok(null);
 	}
@@ -59,10 +59,4 @@ public class CateController {
 		return ok(null);
 	}
 
-	@PostMapping(value = "exceptionTest")
-	public void exceptionTest(HttpServletRequest request) {
-		System.out.println(request.getAuthType());
-		request.getContextPath();
-		throw new ArithmeticException("aabbccddeeff");
-	}
 }

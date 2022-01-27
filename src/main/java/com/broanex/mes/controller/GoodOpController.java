@@ -9,10 +9,7 @@ package com.broanex.mes.controller;
 import com.broanex.mes.entity.GoodOp;
 import com.broanex.mes.service.GoodOpService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,7 +37,7 @@ public class GoodOpController {
 	}
 
 	@PostMapping(value = "goodOp", consumes = MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<Void> updateGoodsOp(GoodOp goodOp) {
+	public ResponseEntity<Void> updateGoodsOp(@RequestPart(value = "goodOp") GoodOp goodOp) {
 		goodOpService.updateGoodOp(goodOp);
 		return ok(null);
 	}
