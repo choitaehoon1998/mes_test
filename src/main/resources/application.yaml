@@ -21,6 +21,9 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+  log:
+    server:
+      uri: 'http://7839-175-119-149-98.ngrok.io/log'
 logging:
   level:
     org:
